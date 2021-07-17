@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { useEffect, useRef, useState } from "react"
 import { useSphere, BodyProps } from "@react-three/cannon"
 import { Canvas, useThree, useFrame } from "@react-three/fiber"
-import { Position } from "lexov_core/ts"
+import { Position } from "lexov_core"
 import { SphereGeometry, Vector3 } from "three"
 const SPEED = 5
 const direction = new THREE.Vector3()

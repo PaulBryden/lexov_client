@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { useEffect, useRef, useState } from "react"
 import { useSphere, BodyProps } from "@react-three/cannon"
 import { Canvas, useThree, useFrame } from "@react-three/fiber"
-import { Position } from "lexov_core/ts"
+import { Position } from "lexov_core"
 import { Vector3 } from "three"
 const SPEED = 5
 const keys = { KeyW: "forward", KeyS: "backward", KeyA: "left", KeyD: "right", Space: "jump" }
@@ -12,7 +12,7 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const speed = new THREE.Vector3()
 
-let position: Position = {x:1, y:2, z:3};
+export let positionReference: Position = {x:1, y:2, z:3};
 
 const usePlayerControls = () => {
   const [movement, setMovement] = useState({ forward: false, backward: false, left: false, right: false, jump: false })
@@ -38,6 +38,7 @@ export function Player(props: JSX.IntrinsicElements['mesh']){
   useFrame((state) => {
     //ref.current.getWorldPosition(new Vector3(position.x, position.y, position.z));
     ref.current.getWorldPosition(camera.position)
+    positionReference=camera.position;
     frontVector.set(0, 0, Number(backward) - Number(forward))
     sideVector.set(Number(left) - Number(right), 0, 0)
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(camera.rotation)

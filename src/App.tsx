@@ -3,10 +3,10 @@ import { Sky, PointerLockControls } from "@react-three/drei"
 import { Canvas, useThree, useFrame } from "@react-three/fiber"
 import { Physics } from "@react-three/cannon"
 import { Ground } from "./Ground"
-import { Player } from "./User"
+import { Player, positionReference } from "./User"
 import { OtherPlayer,updatePosition} from "./otherPlayer"
 import './App.css';
-import {Position} from "lexov_core/ts";
+import {Position, PlayerList} from "lexov_core";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 const client = new W3CWebSocket('ws://127.0.0.1:9001');
@@ -33,9 +33,20 @@ export default function App() {
     catch
     {
     }
+    try
+    {
+      const players: PlayerList = JSON.parse(message.data);
+      console.log("Before update Pos");
+      UpdatePos(players.players[0].position);
+      console.log("After update Pos");
+      
+    }
+    catch
+    {
+    }
     console.log(message);
   };
-  setInterval(()=>{client.send("test");}, 5000);
+  setInterval(()=>{ var pos = positionReference;client.send(JSON.stringify({x:pos.x, y:pos.y, z:pos.z}));}, 1000);
   return ( <Canvas children
     shadows
     gl={{ alpha: false }}
