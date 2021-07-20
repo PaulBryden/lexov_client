@@ -1,8 +1,4 @@
-import * as THREE from 'three'
-import ReactDOM from 'react-dom'
-import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useLoader } from "@react-three/fiber"
+
 import { usePlane} from "@react-three/cannon"
 
 export function Ground(props: JSX.IntrinsicElements['mesh']){

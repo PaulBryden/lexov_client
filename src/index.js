@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import App from "./App"
 
 function Overlay() {
-  const [ready, set] = useState(false)
+   useState(false)
   return (
     <>
       <App />

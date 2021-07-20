@@ -44,7 +44,7 @@ export function Player(props: JSX.IntrinsicElements['mesh']){
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(camera.rotation)
     speed.fromArray(velocity.current)
     api.velocity.set(direction.x, velocity.current[1], direction.z)
-    if (jump && Math.abs(velocity.current[1].toFixed(2)) < 0.05) api.velocity.set(velocity.current[0], 10, velocity.current[2])
+    if (jump && Math.abs(velocity.current[1]) < 0.05) api.velocity.set(velocity.current[0], 10, velocity.current[2])
   })
   return (
     <>
